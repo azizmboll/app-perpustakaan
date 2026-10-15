@@ -1,48 +1,42 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail Buku</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; max-width: 500px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 16px; }
-        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
-        th { width: 160px; background: #f3f4f6; }
-    </style>
-</head>
-<body>
-    <h1>Detail Buku</h1>
-    <p><a href="{{ route('books.index') }}">&larr; Kembali ke daftar buku</a></p>
+@extends('layouts.app')
 
-    <table>
+@section('title', 'Detail Buku')
+
+@section('content')
+    <h1>Detail Buku</h1>
+
+    <p style="margin-bottom: 20px;">
+        <a href="{{ route('books.index') }}">← Kembali ke daftar buku</a>
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
         <tr>
-            <th>Judul</th>
-            <td>{{ $book['judul'] }}</td>
+            <th style="width: 30%; text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Judul</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->judul }}</td>
         </tr>
         <tr>
-            <th>Penulis</th>
-            <td>{{ $book['penulis'] }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Penulis</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->penulis }}</td>
         </tr>
         <tr>
-            <th>Penerbit</th>
-            <td>{{ $book['penerbit'] }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Penerbit</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->penerbit }}</td>
         </tr>
         <tr>
-            <th>Tahun Terbit</th>
-            <td>{{ $book['tahun_terbit'] }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Tahun Terbit</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->tahun_terbit }}</td>
         </tr>
         <tr>
-            <th>ISBN</th>
-            <td>{{ $book['isbn'] ?? '-' }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">ISBN</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->isbn ?? '-' }}</td>
         </tr>
         <tr>
-            <th>Stok</th>
-            <td>{{ $book['stok'] }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Stok</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->stok }}</td>
         </tr>
         <tr>
-            <th>Kategori</th>
-            <td>{{ $book['kategori'] }}</td>
+            <th style="text-align: left; padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; background-color: #ffffff;">Kategori</th>
+            <td style="padding: 10px; border: 1px solid #e5e7eb; background-color: #ffffff;">{{ $book->category->nama_kategori ?? '-' }}</td>
         </tr>
     </table>
-</body>
-</html>
+@endsection

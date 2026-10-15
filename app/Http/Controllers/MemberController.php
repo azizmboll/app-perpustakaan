@@ -25,6 +25,7 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         $validated = $request->validated();
+
         Member::create($validated);
 
         return redirect()->route('members.index')
@@ -33,13 +34,15 @@ class MemberController extends Controller
 
     public function show(string $id)
     {
-        $member = Member::findOrFail($id);
+        $member = Member::with(['loans.loanItems.book', 'loans.user'])->findOrFail($id);
+
         return view('members.show', compact('member'));
     }
 
     public function edit(string $id)
     {
         $member = Member::findOrFail($id);
+
         return view('members.edit', compact('member'));
     }
 
@@ -49,8 +52,8 @@ class MemberController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:100',
-            'nim' => 'required|string|max:20|unique:members,nim,'.$id,
-            'email' => 'required|email|max:100|unique:members,email,'.$id,
+            'nim' => 'required|string|max:20|unique:members,nim,'.$member->id,
+            'email' => 'required|email|max:100|unique:members,email,'.$member->id,
             'nomor_telepon' => 'required|string|max:15',
             'alamat' => 'required|string',
             'status' => 'required|in:aktif,nonaktif',
@@ -59,7 +62,7 @@ class MemberController extends Controller
         $member->update($validated);
 
         return redirect()->route('members.index')
-            ->with('success', "Data anggota \"{$validated['nama']}\" berhasil diperbarui.");
+            ->with('success', "Anggota \"{$validated['nama']}\" berhasil diperbarui.");
     }
 
     public function destroy(string $id)

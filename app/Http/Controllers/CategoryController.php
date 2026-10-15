@@ -14,6 +14,12 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
+    // TAMBAHKAN METHOD CREATE DI SINI
+    public function create()
+    {
+        return view('categories.create');
+    }
+
     public function store(StoreCategoryRequest $request)
     {
         $validated = $request->validated();
@@ -21,6 +27,12 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')
             ->with('success', "Kategori \"{$validated['nama_kategori']}\" berhasil ditambahkan.");
+    }
+
+    public function show(string $id)
+    {
+        $category = Category::findOrFail($id);
+        return view('categories.show', compact('category'));
     }
 
     public function edit(string $id)
@@ -35,7 +47,7 @@ class CategoryController extends Controller
 
         $validated = $request->validate([
             'nama_kategori' => 'required|string|max:100',
-            'deskripsi' => 'nullable|string',
+            'deskripsi'     => 'nullable|string',
         ]);
 
         $category->update($validated);
