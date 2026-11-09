@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; // Baris ini biasanya sudah ada otomatis saat di-generate
-use Illuminate\Support\Facades\Auth; // Tambahkan baris ini secara manual di bawahnya
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Auth; 
 
 class AuthController extends Controller
 {
@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('books.index'))
+        return redirect()->intended(route('dashboard'))
             ->with('success', 'Login berhasil, selamat datang ' . Auth::user()->name . '.');
     }
 
